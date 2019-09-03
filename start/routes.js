@@ -29,7 +29,7 @@ Route.group(() => {
 	Route.post('students', 'StudentController.store')
 	Route.put('students/:id', 'StudentController.update')
 	Route.delete('students/:id', 'StudentController.delete')})
-.prefix('api/api')
+.prefix('api')
 
 Route.post('api/api/login', 'AuthController.postLoginApi').middleware('auth')
 Route.post('api/api/register', 'AuthController.store').middleware('guest')
@@ -42,7 +42,6 @@ Route.group(() => {
 	Route.put('patient/:id', 'PatientController.update')
 	Route.delete('patient/:id', 'PatientController.delete')
 }).prefix('api')
-
 
 
 
