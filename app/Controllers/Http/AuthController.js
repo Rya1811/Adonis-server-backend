@@ -16,8 +16,8 @@ class AuthController {
 		user.role = userInfo.role
 		user.email = userInfo.email
 		user.password = userInfo.password
-		await user.save()
 		return response.status(201).json(user)
+		console.log()
 	}
 	async getProfileApi({ response, auth }) {
 		return response.send(auth.current.user)
