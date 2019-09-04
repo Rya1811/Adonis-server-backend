@@ -20,20 +20,11 @@ Route.get('/', () => {
   return { greeting: 'Hello world in JSON' }
 })
 Route.group(() => {
-	Route.post('students', 'StudentController.store')})
-.prefix('api/v1')
+  Route.post('register', 'AuthController.store')})
+.prefix('api').middleware(['auth',  'isAdmin'])
 
-Route.group(() => {
-	Route.get('students', 'StudentController.index')
-	Route.get('students/:id', 'StudentController.show')
-	Route.post('students', 'StudentController.store')
-	Route.put('students/:id', 'StudentController.update')
-	Route.delete('students/:id', 'StudentController.delete')})
-.prefix('api')
-
-Route.post('api/api/login', 'AuthController.postLoginApi').middleware('auth')
-Route.post('api/api/register', 'AuthController.store').middleware('guest')
-Route.get('api/api/profile', 'AuthController.getProfileApi').middleware('auth')
+Route.post('api/user/login', 'AuthController.postLoginApi').middleware('guest')
+Route.get('api/user/profile', 'AuthController.getProfileApi').middleware('auth')
 
 Route.group(() => {
 	Route.get('patient', 'PatientController.index')
@@ -41,7 +32,8 @@ Route.group(() => {
 	Route.post('patient', 'PatientController.store')
 	Route.put('patient/:id', 'PatientController.update')
 	Route.delete('patient/:id', 'PatientController.delete')
-}).prefix('api')
+  Route.get('user', 'AuthController.index')
+}).prefix('api').middleware(['auth', 'isSuper'])
 
 
 

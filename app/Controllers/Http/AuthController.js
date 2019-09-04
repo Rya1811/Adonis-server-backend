@@ -3,6 +3,11 @@
 const User = use('App/Models/User')
 
 class AuthController {
+
+	async index ({response}) {
+		let user = await User.all()
+		return response.json(user)
+	}
 	
 	async postLoginApi({ request, auth}) {
 		const { email, password} = request.all()
@@ -10,14 +15,14 @@ class AuthController {
 			.attempt(email, password, true)
 	}
 	async store ({request, response}) {
-		const userInfo = request.only(['name', 'email', 'password'])
+		const { name, email, password, access } = request.post()
 		const user = new User()
-		user.name = userInfo.name
-		user.role = userInfo.role
-		user.email = userInfo.email
-		user.password = userInfo.password
+		user.name = name
+		user.access = access
+		user.email = email
+		user.password = password
+		await user.save()
 		return response.status(201).json(user)
-		console.log()
 	}
 	async getProfileApi({ response, auth }) {
 		return response.send(auth.current.user)

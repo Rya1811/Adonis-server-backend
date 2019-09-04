@@ -4,6 +4,9 @@
 const Model = use('Model')
 
 class Patient extends Model {
+  cek () {
+    return this.hasMany('App/Models/Checkup')
+  }
 }
 
 module.exports = Patient
