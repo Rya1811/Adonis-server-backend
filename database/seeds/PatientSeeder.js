@@ -27,9 +27,9 @@ class PatientSeeder {
 
 
     const checkup = new Checkup()
-    checkup.user_id = 1
+    checkup.user_id = 2
     checkup.position = 'standing'
-    checkup.projection = 'ap'
+    checkup.projection = 'pa'
     checkup.fdd = 'ap'
     checkup.kv = '87'
     checkup.ma = '123'
