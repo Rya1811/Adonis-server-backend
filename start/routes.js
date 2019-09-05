@@ -20,11 +20,11 @@ Route.get('/', () => {
   return { greeting: 'Hello world eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjMsImRhdGEiOnsiaWQiOjMsIm5hbWUiOiJVc2VyIDMiLCJlbWFpbCI6InUzQG1haWwuY29tIiwiYWNjZXNzIjoyLCJjcmVhdGVkX2F0IjoiMjAxOS0wOS0wMyAxNTozODo1NyIsInVwZGF0ZWRfYXQiOiIyMDE5LTA5LTAzIDE1OjM4OjU3In0sImlhdCI6MTU2NzQ5OTk0NX0.5Rx6EXTZkliZwQTMfZVLF7RZDAPIseZ93Y-4ZSbnunkin JSON' }
 })
 Route.group(() => {
-  Route.post('register', 'AuthController.store')})
-.prefix('api').middleware(['auth',  'isAdmin'])
+  Route.post('register', 'UserController.store')
+}).prefix('api').middleware(['auth',  'isAdmin'])
 
 Route.post('api/user/login', 'AuthController.postLoginApi').middleware('guest')
-Route.get('api/user/profile', 'AuthController.getProfileApi').middleware('auth')
+Route.get('api/user/profile', 'Controller.getProfileApi').middleware('auth')
 
 Route.group(() => {
 	Route.get('patient', 'PatientController.index')
@@ -32,7 +32,9 @@ Route.group(() => {
 	Route.post('patient/add', 'PatientController.store')
 	Route.put('patient/update/:id', 'PatientController.update')
 	Route.delete('patient/delete/:id', 'PatientController.delete')
-  Route.get('user', 'AuthController.index')
+  Route.get('user', 'UserController.index')
+  Route.put('user/update/:id', 'UserController.update')
+  Route.delete('user/delete/:id', 'UserController.destroy')
 }).prefix('api').middleware(['auth', 'isSuper'])
 
 Route.group(() => {

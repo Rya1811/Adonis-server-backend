@@ -14,7 +14,6 @@
 const Factory = use('Factory')
 const User = use('App/Models/User')
 
-
 class UserSeeder {
   async run () {
   	const u1 = new User()
@@ -29,7 +28,7 @@ class UserSeeder {
     u2.access = 0
     u2.password = 'pass-u2'
     u2.email = 'u2@mail.com'
-	await u2.save()
+    await u2.save()
 
     const u3 = new User()
     u3.name = 'User 3'
@@ -37,7 +36,6 @@ class UserSeeder {
     u3.password = 'pass-u3'
     u3.email = 'u3@mail.com'
     await u3.save()
-
   }
 }
 

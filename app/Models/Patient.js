@@ -4,8 +4,8 @@
 const Model = use('Model')
 
 class Patient extends Model {
-  cek () {
-    return this.hasMany('App/Models/Checkup')
+  checkups () {
+    return this.hasMany('App/Models/Checkup', 'code', 'code')
   }
 }
 

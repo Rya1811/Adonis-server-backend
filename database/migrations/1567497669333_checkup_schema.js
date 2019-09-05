@@ -7,8 +7,9 @@ class CheckupSchema extends Schema {
   up () {
     this.create('checkups', (table) => {
       table.increments()
-      table.integer('user_id')
-      table.integer('patient_id')
+      table.integer('user_id').unsigned().references('id').inTable('users')
+      table.integer('code').unsigned().references('code').inTable('patients')
+      table.integer('weight')
       table.enu('position', ['standing', 'supine']).notNullable()
       table.enu('projection', ['oblique', 'ap', 'pa']).notNullable()
       table.enu('fdd', ['oblique', 'ap', 'pa']).notNullable()
@@ -17,7 +18,7 @@ class CheckupSchema extends Schema {
       table.string('s')
       table.string('mas')
       table.string('skin')
-      table.string('dap').notNullable()
+      table.string('dap')
       table.timestamps()
     })
   }

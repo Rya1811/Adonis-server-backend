@@ -25,7 +25,6 @@ class PatientSeeder {
     u1.weight = '45'
     await u1.save()
 
-
     const checkup = new Checkup()
     checkup.user_id = 2
     checkup.position = 'standing'

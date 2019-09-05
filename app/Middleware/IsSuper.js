@@ -13,7 +13,7 @@ class IsSuper {
     if (auth.current.user.access > 0) {
       return next()
     }
-    return response.send({ message: 'access denied'})
+    return response.send({ message: 'access denied' })
     await next()
   }
 }
