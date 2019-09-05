@@ -3,9 +3,14 @@
 const Patient = use('App/Models/Patient')
 
 class PatientController {
-	async index ({response}) {
-		let patient = await Patient.all()
-		return response.json(patient)
+	async index ({ request, response }) {
+		const patient = await Patient
+		.query()
+		.paginate(request.input('page'),10)
+		return response.ok({
+			...patient.toJSON()
+		})
+		
 	}
 	async store ({request, response}) {
 		const { code, name, gender, age, weight} = request.post()
@@ -20,13 +25,12 @@ class PatientController {
 	}
 	async show ({params, response}) {
 		const patient = await Patient.find(params.id)
-		const patientCheck = await patient.cek().fetch()
-		return response.json(patientCheck)
+		return response.json(patient)
 	}
 	async update ({params, request, response}) {
 		const { code, name, gender, age, weight} = request.post()
 		const patient = await Patient.find(params.id)
-		if (!student) {
+		if (!patient) {
 			return response.status(404).json({data: 'Resource not found'})
 		}
 		patient.code = code
