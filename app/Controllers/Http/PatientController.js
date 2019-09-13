@@ -5,7 +5,7 @@ const Patient = use('App/Models/Patient')
 class PatientController {
   async index ({ request, response }) {
     const patient = await Patient
-    	.with('checkups')
+    	.with('checkup')
       .query()
       .fetch()
       .paginate(request.input('page'), 10)

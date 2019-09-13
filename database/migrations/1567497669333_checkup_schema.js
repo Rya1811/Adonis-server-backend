@@ -17,6 +17,8 @@ class CheckupSchema extends Schema {
       table.string('mas')
       table.string('skin')
       table.string('dap')
+      table.integer('Patients_id').unsigned().index('Patients_id')
+      table.foreign('Patients_id').references('patients.id').onDelete('cascade')
       table.timestamps()
     })
   }

@@ -4,6 +4,7 @@
 const Model = use('Model')
 
 class Checkup extends Model {
+  
 }
 
 module.exports = Checkup
