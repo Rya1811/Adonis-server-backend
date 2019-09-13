@@ -4,7 +4,7 @@ const Checkup = use('App/Models/Checkup')
 const Patient = use('App/Models/Patient')
 
 class CheckupController {
-  async index ({ request, response, params: { patient_id } }) {
+  async index ({ request, response, params }) {
     const checkup = await Checkup
       .query()
       .where('code', patient_id)
@@ -25,17 +25,15 @@ class CheckupController {
 
   async store ({ request, response, auth, params: { patient_id } }) {
     const data = this.$storeAttribute(request)
-    const patient = await Patient.findByOrFail('code', patient_id)
     const checkup = await patient
       .Checkup()
-      .create({ user_id: auth.current.user.id, ...data })
+      .create({ data })
     return response.ok({
       data: checkup
     })
   }
 
   async show ({ request, response, params: { patient_id, id } }) {
-    const patient = await Patient.findByOrFail('code', patient_id)
     const checkup = await patient
       .Checkup()
       .where('id', id)
@@ -52,7 +50,6 @@ class CheckupController {
   }
 
   async update ({ request, response, params: { patient_id, id } }) { // eslint-disable-line camelcase
-    const patient = await Patient.findByOrFail('code', patients_id)
     await patient
       .checkups()
       .where('id', id)

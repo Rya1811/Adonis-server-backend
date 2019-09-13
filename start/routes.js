@@ -20,7 +20,7 @@ Route.get('/', () => {
   return { greeting: 'Hello world eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjMsImRhdGEiOnsiaWQiOjMsIm5hbWUiOiJVc2VyIDMiLCJlbWFpbCI6InUzQG1haWwuY29tIiwiYWNjZXNzIjoyLCJjcmVhdGVkX2F0IjoiMjAxOS0wOS0wMyAxNTozODo1NyIsInVwZGF0ZWRfYXQiOiIyMDE5LTA5LTAzIDE1OjM4OjU3In0sImlhdCI6MTU2NzQ5OTk0NX0.5Rx6EXTZkliZwQTMfZVLF7RZDAPIseZ93Y-4ZSbnunkin JSON' }
 })
 Route.group(() => {
-  Route.post('register', 'UserController.store')
+  Route.post('user/register', 'UserController.store')
 }).prefix('api').middleware(['auth',  'isAdmin'])
 
 Route.post('api/user/login', 'AuthController.postLoginApi').middleware('guest')

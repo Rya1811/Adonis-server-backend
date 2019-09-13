@@ -5,7 +5,9 @@ const Patient = use('App/Models/Patient')
 class PatientController {
   async index ({ request, response }) {
     const patient = await Patient
+    	.with('checkups')
       .query()
+      .fetch()
       .paginate(request.input('page'), 10)
     return response.ok({
       ...patient.toJSON()

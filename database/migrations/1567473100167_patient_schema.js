@@ -7,7 +7,7 @@ class PatientSchema extends Schema {
   up () {
     this.create('patients', (table) => {
       table.increments()
-      table.string('code').notNullable().unique()
+      table.integer('code').notNullable().unique()
       table.string('name').notNullable()
       table.enu('gender', ['male', 'female']).notNullable()
       table.string('age').notNullable()
