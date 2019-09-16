@@ -23,7 +23,7 @@ class CheckupController {
     ])
   }
 
-  async store ({ request, response, auth, params: { patient_id } }) {
+  async store ({ request, response, auth, params: { patient_id, id } }) {
     const data = this.$storeAttribute(request)
     const checkup = await patient
       .Checkup()

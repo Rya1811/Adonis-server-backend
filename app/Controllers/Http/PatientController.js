@@ -12,7 +12,7 @@ class PatientController {
   }
 
   async store ({ request, response }) {
-    const data = request.only(['code', 'name', 'gender', 'age', 'weight'])
+    const data = request.only(['code', 'name', 'gender', 'age'])
     const patient = await Patient.create(data)
     return response.ok({
       data: patient
@@ -26,7 +26,7 @@ class PatientController {
   }
 
   async update ({ params, request, response }) {
-    const data = request.only(['name', 'gender', 'age', 'weight'])
+    const data = request.only(['name', 'gender', 'age'])
     const patient = await Patient.findByOrFail('code', id)
     patient.merge(data)
     await patient.save()
