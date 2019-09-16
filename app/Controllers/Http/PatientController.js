@@ -8,10 +8,7 @@ class PatientController {
     	.with('checkup')
       .query()
       .fetch()
-      .paginate(request.input('page'), 10)
-    return response.ok({
-      ...patient.toJSON()
-    })
+      return response.json(patient)
   }
 
   async store ({ request, response }) {

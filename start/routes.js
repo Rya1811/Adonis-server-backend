@@ -28,7 +28,7 @@ Route.get('api/user/profile', 'Controller.getProfileApi').middleware('auth')
 
 Route.group(() => {
 	Route.get('patient', 'PatientController.index')
-	Route.get('patient/:id', 'PatientController.show')
+	
 	Route.post('patient/add', 'PatientController.store')
 	Route.put('patient/update/:id', 'PatientController.update')
 	Route.delete('patient/delete/:id', 'PatientController.delete')
@@ -36,6 +36,8 @@ Route.group(() => {
   Route.put('user/update/:id', 'UserController.update')
   Route.delete('user/delete/:id', 'UserController.destroy')
 }).prefix('api').middleware(['auth', 'isSuper'])
+
+Route.get('Api/patient/:id', 'PatientController.show')
 
 Route.group(() => {
   Route.get('cekup', 'PatientController.index')
