@@ -27,6 +27,7 @@ Route.post('api/user/login', 'AuthController.postLoginApi').middleware('guest')
 Route.get('api/user/profile', 'Controller.getProfileApi').middleware('auth')
 
 Route.group(() => {
+  Route.get('patient', 'PatientController.index')
 	Route.get('patient/:id', 'PatientController.show')
 	Route.post('patient/add', 'PatientController.store')
 	Route.put('patient/update/:id', 'PatientController.update')
@@ -40,7 +41,6 @@ Route.group(() => {
 
 Route.group(() => {
   Route.get('cekup', 'PatientController.index')
-  Route.get('patient', 'PatientController.index')
   Route.get('cekup/:id', 'PatientController.show')
   Route.post('cekup/add', 'PatientController.store')
   Route.put('cekup/update/:id', 'PatientController.update')
