@@ -36,10 +36,11 @@ Route.group(() => {
   Route.delete('user/delete/:id', 'UserController.destroy')
 }).prefix('api').middleware(['auth', 'isSuper'])
 
-Route.get('api/patient', 'PatientController.index')
+
 
 Route.group(() => {
   Route.get('cekup', 'PatientController.index')
+  Route.get('patient', 'PatientController.index')
   Route.get('cekup/:id', 'PatientController.show')
   Route.post('cekup/add', 'PatientController.store')
   Route.put('cekup/update/:id', 'PatientController.update')

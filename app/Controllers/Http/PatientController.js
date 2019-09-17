@@ -4,10 +4,9 @@ const Patient = use('App/Models/Patient')
 
 class PatientController {
   async index ({ request, response }) {
-    const patient = await Patient
-    	.with('checkup')
-      .query()
-      .fetch()
+    const patient = await Patient.query()
+    	              .with('checkup')
+                    .fetch()
       return response.json(patient)
   }
 
