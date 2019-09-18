@@ -8,9 +8,9 @@ class CheckupSchema extends Schema {
     this.create('checkups', (table) => {
       table.increments()
       table
-          .integer('patient_id')
+          .integer('code_patient')
           .unsigned()
-          .references('id')
+          .references('code')
           .inTable('patients')
       table.integer('weight')
       table.enu('position', ['standing', 'supine']).notNullable()

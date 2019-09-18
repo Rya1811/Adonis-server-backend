@@ -1,13 +1,24 @@
 'use strict'
 
 const Patient = use('App/Models/Patient')
+const Database = use('Database')
 
 class PatientController {
   async index ({ request, response }) {
-    const patient = await Patient.query()
-    	              .with('checkup')
-                    .fetch()
-      return response.json(patient)
+    const recentCheckup = await Database
+      .select('*')
+      .from('patients')
+      .innerJoin(
+        Database
+          .table('checkups')
+          .distinct(Database.raw('FROM (patient_id) *'))
+          .orderBy('patient_id')
+          .as('c'),
+          'patients.patient_id',
+          'c.patient_id'
+      )
+      .orderBy('c.created_at', 'desc')
+      return response.json(recentCheckup)
   }
 
   async store ({ request, response }) {
