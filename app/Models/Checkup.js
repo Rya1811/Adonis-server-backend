@@ -5,7 +5,7 @@ const Model = use('Model')
 
 class Checkup extends Model {
   Patient () {
-      return this.belongsTo('App/Models/Patient')
+    return this.belongsTo('App/Models/Patient')
   }
 }
 

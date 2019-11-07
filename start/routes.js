@@ -21,16 +21,16 @@ Route.get('/', () => {
 })
 Route.group(() => {
   Route.post('user/register', 'UserController.store')
-}).prefix('api').middleware(['auth',  'isAdmin'])
+}).prefix('api').middleware(['auth', 'isAdmin'])
 
 Route.post('api/user/login', 'AuthController.postLoginApi').middleware('guest')
 Route.get('api/user/profile', 'Controller.getProfileApi').middleware('auth')
 
 Route.group(() => {
-	Route.get('patient/:id', 'PatientController.show')
-	Route.post('patient/add', 'PatientController.store')
-	Route.put('patient/update/:id', 'PatientController.update')
-	Route.delete('patient/delete/:id', 'PatientController.delete')
+  Route.get('patient/:id', 'PatientController.show')
+  Route.post('patient/add', 'PatientController.store')
+  Route.put('patient/update/:id', 'PatientController.update')
+  Route.delete('patient/delete/:id', 'PatientController.delete')
   Route.get('user', 'UserController.index')
   Route.put('user/update/:id', 'UserController.update')
   Route.delete('user/delete/:id', 'UserController.destroy')
@@ -45,6 +45,3 @@ Route.group(() => {
   Route.put('cekup/update/:id', 'PatientController.update')
   Route.delete('cekup/delete/:id', 'PatientController.delete')
 }).prefix('api')
-
-
-

@@ -8,10 +8,10 @@ class CheckupSchema extends Schema {
     this.create('checkups', (table) => {
       table.increments()
       table
-          .integer('code_patient')
-          .unsigned()
-          .references('code')
-          .inTable('patients')
+        .integer('code_patient')
+        .unsigned()
+        .references('code')
+        .inTable('patients')
       table.integer('weight')
       table.enu('position', ['standing', 'supine']).notNullable()
       table.enu('projection', ['oblique', 'ap', 'pa']).notNullable()

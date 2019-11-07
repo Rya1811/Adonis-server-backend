@@ -33,14 +33,9 @@ class CheckupController {
     })
   }
 
-  async show ({ request, response, params: { patient_id, id } }) {
-    const checkup = await patient
-      .Checkup()
-      .where('id', id)
-      .fetch()
-    return response.ok({
-      data: checkup.row[0]
-    })
+  async show ({ response, params ) {
+    const patient = await Patient.find(params.id)
+    return response.json(patient)
   }
 
   $updateAttribute (request) {
@@ -58,12 +53,12 @@ class CheckupController {
   }
 
   async destroy ({ request, response, params: { patient_id, id } }) { // eslint-disable-line camelcase
-    const patient = await Patient.findByOrFail('code', patients_id)
-    await patient
-      .checkups()
-      .where('id', id)
-      .delete()
-    return response.noContent()
+     const patient = await patient.find(params.id)
+    if (!patient) {
+      return response.status(404).json({ data: 'Resource not found' })
+    }
+    await patient.delete()
+    return response.status(204).json(null)
   }
 }
 

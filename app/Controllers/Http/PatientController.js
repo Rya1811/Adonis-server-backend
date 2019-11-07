@@ -1,24 +1,13 @@
 'use strict'
 
 const Patient = use('App/Models/Patient')
-const Database = use('Database')
 
 class PatientController {
   async index ({ request, response }) {
-    const recentCheckup = await Database
-      .select('*')
-      .from('patients')
-      .innerJoin(
-        Database
-          .table('checkups')
-          .distinct(Database.raw('FROM (patient_id) *'))
-          .orderBy('patient_id')
-          .as('c'),
-          'patients.patient_id',
-          'c.patient_id'
-      )
-      .orderBy('c.created_at', 'desc')
-      return response.json(recentCheckup)
+    const patient = await Patient.query()
+      .with('checkup')
+      .fetch()
+    return response.json(patient)
   }
 
   async store ({ request, response }) {
@@ -30,9 +19,15 @@ class PatientController {
     return response.status(201).json(patient)
   }
 
-  async show ({ params, response }) {
-    const patient = await Patient.find(params.id)
-    return response.json(patient)
+  async show ({ request, response, params: { patient_id, id } }) {
+    const patient = await Patient.findByOrFail('id', patient_id)
+    const checkup = await patient
+      .checkups()
+      .where('id', id)
+      .fetch()
+    return response.ok({
+      data: checkup.row[0]
+    })
   }
 
   async update ({ params, request, response }) {
